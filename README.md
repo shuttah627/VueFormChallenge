@@ -1,4 +1,4 @@
-##Vue Form for coding challenge.##
+##Vue Form for coding challenge.
 
 **To open my submission, download the repository below with the green "Clone or download" button, and open index.html in your browser, or visit https://shuttah627.github.io/VueFormChallenge/**
 

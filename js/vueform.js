@@ -30,11 +30,24 @@ var app = new Vue({
                 question_type: "textarea"
             }]}, {
 
-            question_name: "UserLookup",
+            question_name: "Type in the users name",
             question_value: null,
             question_required: true,
             question_page: 1,
-            question_type: "text",
+            question_type: "autofill",
+            extent_questions: [{
+                eval: 0,
+                question_name: "First Name",
+                question_value: null,
+                question_required: true,
+                question_type: "text"
+            },{
+                eval: 0,
+                question_name: "Last Name",
+                question_value: null,
+                question_required: true,
+                question_type: "text"
+            }]
             },{
 
             question_name: "What is the Users role?",
@@ -82,7 +95,7 @@ var app = new Vue({
         }],
 
         autofill_names: {
-
+            people: []
         }
     
     
@@ -90,7 +103,14 @@ var app = new Vue({
     },
     methods: {
         getNames() {
-
+            var data_temp = []
+            var result = $.get("https://randomuser.me/api/?results=50&nat=au&exc=login", function(data){
+                for (i = 0; i < data.results.length; i++) {
+                    //console.log(data.results[i].name)
+                    data_temp.push(data.results[i].name)
+                }
+            })
+            this.autofill_names.people.push(data_temp)
         },
 
         buildData() {
@@ -106,9 +126,16 @@ var app = new Vue({
             console.log(data_to_send)
             sendData(data_to_send)
         },
-        
+
+        backPage() {
+            if (this.current_page > 1) {
+                current_page -= 1
+            }
+        },
+
         checkPage() {
             // Validation
+            this.getNames()
             var missed_questions = []
             for (i = 0; i < this.questions.length; i++) {
                 if (this.questions[i].question_page == this.current_page && this.questions[i].question_required == true) {

@@ -79,8 +79,34 @@ var app = new Vue({
                 question_required: true,
                 question_type: "text"
             }]
-        }]},
+        }],
+
+        autofill_names: {
+
+        }
+    
+    
+    
+    },
     methods: {
+        getNames() {
+
+        },
+
+        buildData() {
+            // Packaging for JSON post
+            data_to_send = {}
+            for (i = 0; i < this.questions.length; i++) {
+                //Building question and answer pairs
+                data_to_send["q"+i] = this.questions[i].question_value
+                if (this.questions[i].extent_questions) {
+                    data_to_send["hq"+i] = this.questions[i].extent_questions[0].question_value
+                }
+            }
+            console.log(data_to_send)
+            sendData(data_to_send)
+        },
+        
         checkPage() {
             // Validation
             var missed_questions = []
@@ -108,8 +134,10 @@ var app = new Vue({
             if (this.current_page == 1) {
                 this.current_page += 1           // displays page 2 content only
             } else {
-                alert("TO SUBMIT JSON")
+                this.buildData()
             }
-        }
+        },
+
+    
     }
 })

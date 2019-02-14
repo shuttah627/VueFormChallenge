@@ -5,4 +5,5 @@ Things to do;
 3. Connect base form to replicate each question
 4. ~~Bind existing text fields with vue variables~~
 5. Setup Q1a, Q2a, Q2b, and Q3a for conditional visability
-6. Setup system for going to next 'page'
+6. ~~Setup system for going to next 'page'~~
+7. ~~Validate data and check for empty fields~~

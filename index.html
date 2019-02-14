@@ -13,7 +13,7 @@
                     
                     <!-- Dropdowns -->
                     <select v-if="question.question_type == 'dropdown'" v-model="question.question_value">
-                        <option v-for="choice in question.vals" :value=option.val_value :name=question.question_name>
+                        <option v-for="choice in question.vals" :value=choice.val_value :name=question.question_name>
                             {{ choice.val_name }}
                         </option>
                     </select>
@@ -27,7 +27,7 @@
                         <!-- Hidden Conditional Question -->
                         <div v-for="ext in question.extent_questions">
                                 <div v-if="question.question_value == ext.eval">
-                                    <h1>{{ext.question_name}}</h1>
+                                    <h2>{{ext.question_name}}</h2>
                                     <textarea v-model="ext.question_value" v-if="ext.question_type == 'textarea'"></textarea>
                                     <input v-model="ext.question_value" v-else :type=ext.question_type></input>
                                 </div>

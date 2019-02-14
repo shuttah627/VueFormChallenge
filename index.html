@@ -5,13 +5,42 @@
     </head>
     <body>
         <div id="app">
-            
+            <div v-for="question in questions">
+                <div v-if="question.question_page == current_page">
+                    <h2>{{ question.question_name }}</h2>
 
+                    <!-- Begin specifc input checks -->
+                    
+                    <!-- Dropdowns -->
+                    <select v-if="question.question_type == 'dropdown'" v-model="question.question_value">
+                        <option v-for="choice in question.vals" :value=option.val_value :name=question.question_name>
+                            {{ choice.val_name }}
+                        </option>
+                    </select>
 
+                    <!-- Radio Buttons -->
+                    <div v-else-if="question.question_type == 'radio'">
+                        <div v-for="choice in question.vals">
+                            <label>{{ choice.val_name }}</label><input type='radio' v-model="question.question_value" :name=question.question_name :value=choice.val_value></input>
+                        </div>
 
+                        <!-- Hidden Conditional Question -->
+                        <div v-for="ext in question.extent_questions">
+                                <div v-if="question.question_value == ext.eval">
+                                    <h1>{{ext.question_name}}</h1>
+                                    <textarea v-model="ext.question_value" v-if="ext.question_type == 'textarea'"></textarea>
+                                    <input v-model="ext.question_value" v-else :type=ext.question_type></input>
+                                </div>
+                        </div>
+                    </div>
 
+                    <!-- Everything else (standard textboxes) -->
+                    <input v-else v-model="question.question_value" :type=question.question_type></input>
+                
+                    <!-- End specific input checks -->
 
-
-
+                </div>
+            </div>
+            <button v-on:click="checkPage()">Next</button>
         </div>
     </body>

@@ -27,20 +27,11 @@ var app = new Vue({
                 question_value: null,
                 question_required: true,
                 question_type: "textarea"
-            }]}, {
-                
-            }
-
-
-        }]
+            }]}
+        ]},
+    methods: {
+        checkPage() {
+            alert("TO DO VALIDATION")
+        }
     }
-
-
-
-
-
-
-
-
-
 })
